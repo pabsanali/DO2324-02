@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: product-api-production
+  name: product-api-production-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: product-api-production-pod
+  template:
+    metadata:
+      labels:
+        app: product-api-production-pod
+    spec:
+      containers:
+      - name: product-api-production-pod-container
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: DATABASE_HOST
+          value: "cluster0.v9zlcdz.mongodb.net"
+        - name: DATABASE_PORT
+          value: ""
+        - name: DATABASE_TECHNOLOGY
+          value: "mongoose"
+        - name: MONGO_INITDB_ROOT_USERNAME
+          value: "deliverusadvanced"
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          value: "deliverusadvanced"
+        - name: MONGO_INITDB_DATABASE
+          value: "deliverusadvanced"
+        - name: DATABASE_USERNAME
+          value: "uservice"
+        - name: DATABASE_PASSWORD
+          value: "M4r4IzI5f9YbupSj"
+        - name: DATABASE_PROTOCOL
+          value: mongodb+srv
+        - name: APP_PORT
+          value: "8080"
+        resources: {}
+        image: feljimgon3/dos-product-ass-product-atlas:v1
+        ports:
+        - containerPort: 8080
+      restartPolicy: Always
